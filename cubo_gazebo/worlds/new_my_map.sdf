@@ -1,0 +1,4236 @@
+<sdf version='1.10'>
+  <world name='default'>
+    <physics name='1ms' type='ignored'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <gravity>0 0 -9.8000000000000007</gravity>
+    <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <scene>
+      <ambient>0.800000006 0.800000006 0.800000006 1</ambient>
+      <background>0.8 0.8 0.8 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <gui fullscreen="0">
+      <!-- GUI plugins -->
+      <!-- 3D scene -->
+      <plugin filename="MinimalScene" name="3D View">
+          <gz-gui>
+              <title>3D View</title>
+              <property type="bool" key="showTitleBar">false</property>
+              <property type="string" key="state">docked</property>
+          </gz-gui>
+          <engine>ogre2</engine>
+          <scene>scene</scene>
+          <ambient_light>0.4 0.4 0.4</ambient_light>
+          <background_color>0.8 0.8 0.8</background_color>
+          <camera_pose>3 0 2 0 0.4 3.141592</camera_pose>
+          <camera_clip>
+            <near>0.01</near>
+            <far>25000</far>
+          </camera_clip>
+      </plugin>
+
+      <!-- Plugins that add functionality to the scene -->
+      <plugin filename="EntityContextMenuPlugin" name="Entity context menu">
+          <gz-gui>
+              <property key="state" type="string">floating</property>
+              <property key="width" type="double">5</property>
+              <property key="height" type="double">5</property>
+              <property key="showTitleBar" type="bool">false</property>
+          </gz-gui>
+      </plugin>
+
+      <plugin filename="GzSceneManager" name="Scene Manager">
+          <gz-gui>
+              <property key="resizable" type="bool">false</property>
+              <property key="width" type="double">5</property>
+              <property key="height" type="double">5</property>
+              <property key="state" type="string">floating</property>
+              <property key="showTitleBar" type="bool">false</property>
+          </gz-gui>
+      </plugin>
+
+      <plugin filename="InteractiveViewControl" name="Interactive view control">
+          <gz-gui>
+              <property key="resizable" type="bool">false</property>
+              <property key="width" type="double">5</property>
+              <property key="height" type="double">5</property>
+              <property key="state" type="string">floating</property>
+              <property key="showTitleBar" type="bool">false</property>
+          </gz-gui>
+      </plugin>
+
+      <plugin filename="CameraTracking" name="Camera Tracking">
+          <gz-gui>
+              <property key="resizable" type="bool">false</property>
+              <property key="width" type="double">5</property>
+              <property key="height" type="double">5</property>
+              <property key="state" type="string">floating</property>
+              <property key="showTitleBar" type="bool">false</property>
+          </gz-gui>
+      </plugin>
+
+      <plugin filename="MarkerManager" name="Marker manager">
+          <gz-gui>
+              <property key="resizable" type="bool">false</property>
+              <property key="width" type="double">5</property>
+              <property key="height" type="double">5</property>
+              <property key="state" type="string">floating</property>
+              <property key="showTitleBar" type="bool">false</property>
+          </gz-gui>
+      </plugin>
+
+      <plugin filename="SelectEntities" name="Select Entities">
+          <gz-gui>
+              <property key="resizable" type="bool">false</property>
+              <property key="width" type="double">5</property>
+              <property key="height" type="double">5</property>
+              <property key="state" type="string">floating</property>
+              <property key="showTitleBar" type="bool">false</property>
+          </gz-gui>
+      </plugin>
+
+      <plugin filename="Spawn" name="Spawn Entities">
+          <gz-gui>
+              <property key="resizable" type="bool">false</property>
+              <property key="width" type="double">5</property>
+              <property key="height" type="double">5</property>
+              <property key="state" type="string">floating</property>
+              <property key="showTitleBar" type="bool">false</property>
+          </gz-gui>
+      </plugin>
+
+      <plugin filename="VisualizationCapabilities" name="Visualization Capabilities">
+          <gz-gui>
+              <property key="resizable" type="bool">false</property>
+              <property key="width" type="double">5</property>
+              <property key="height" type="double">5</property>
+              <property key="state" type="string">floating</property>
+              <property key="showTitleBar" type="bool">false</property>
+          </gz-gui>
+      </plugin>
+
+      <!-- World control -->
+      <plugin filename="WorldControl" name="World control">
+          <gz-gui>
+              <title>World control</title>
+              <property type="bool" key="showTitleBar">false</property>
+              <property type="bool" key="resizable">false</property>
+              <property type="double" key="height">72</property>
+              <property type="double" key="z">1</property>
+              <property type="string" key="state">floating</property>
+              <anchors target="3D View">
+                  <line own="left" target="left"/>
+                  <line own="bottom" target="bottom"/>
+              </anchors>
+          </gz-gui>
+          <play_pause>true</play_pause>
+          <step>true</step>
+          <start_paused>true</start_paused>
+          <use_event>true</use_event>
+      </plugin>
+
+      <!-- World statistics -->
+      <plugin filename="WorldStats" name="World stats">
+          <gz-gui>
+              <title>World stats</title>
+              <property type="bool" key="showTitleBar">false</property>
+              <property type="bool" key="resizable">false</property>
+              <property type="double" key="height">110</property>
+              <property type="double" key="width">290</property>
+              <property type="double" key="z">1</property>
+              <property type="string" key="state">floating</property>
+              <anchors target="3D View">
+                  <line own="right" target="right"/>
+                  <line own="bottom" target="bottom"/>
+              </anchors>
+          </gz-gui>
+          <sim_time>true</sim_time>
+          <real_time>true</real_time>
+          <real_time_factor>true</real_time_factor>
+          <iterations>true</iterations>
+      </plugin>
+
+      <!-- Insert simple shapes -->
+      <plugin filename="Shapes" name="Shapes">
+          <gz-gui>
+              <property key="resizable" type="bool">false</property>
+              <property key="x" type="double">0</property>
+              <property key="y" type="double">0</property>
+              <property key="width" type="double">250</property>
+              <property key="height" type="double">50</property>
+              <property key="state" type="string">floating</property>
+              <property key="showTitleBar" type="bool">false</property>
+              <property key="cardBackground" type="string">#666666</property>
+          </gz-gui>
+      </plugin>
+
+      <!-- Insert lights -->
+      <plugin filename="Lights" name="Lights">
+          <gz-gui>
+              <property key="resizable" type="bool">false</property>
+              <property key="x" type="double">250</property>
+              <property key="y" type="double">0</property>
+              <property key="width" type="double">150</property>
+              <property key="height" type="double">50</property>
+              <property key="state" type="string">floating</property>
+              <property key="showTitleBar" type="bool">false</property>
+              <property key="cardBackground" type="string">#666666</property>
+          </gz-gui>
+      </plugin>
+
+      <!-- Translate / rotate -->
+      <plugin filename="TransformControl" name="Transform control">
+          <gz-gui>
+              <property key="resizable" type="bool">false</property>
+              <property key="x" type="double">0</property>
+              <property key="y" type="double">50</property>
+              <property key="width" type="double">250</property>
+              <property key="height" type="double">50</property>
+              <property key="state" type="string">floating</property>
+              <property key="showTitleBar" type="bool">false</property>
+              <property key="cardBackground" type="string">#777777</property>
+          </gz-gui>
+      </plugin>
+
+      <!-- Screenshot -->
+      <plugin filename="Screenshot" name="Screenshot">
+          <gz-gui>
+              <property key="resizable" type="bool">false</property>
+              <property key="x" type="double">250</property>
+              <property key="y" type="double">50</property>
+              <property key="width" type="double">50</property>
+              <property key="height" type="double">50</property>
+              <property key="state" type="string">floating</property>
+              <property key="showTitleBar" type="bool">false</property>
+              <property key="cardBackground" type="string">#777777</property>
+          </gz-gui>
+      </plugin>
+
+      <!-- Copy/Paste -->
+      <plugin filename="CopyPaste" name="CopyPaste">
+          <gz-gui>
+              <property key="resizable" type="bool">false</property>
+              <property key="x" type="double">300</property>
+              <property key="y" type="double">50</property>
+              <property key="width" type="double">100</property>
+              <property key="height" type="double">50</property>
+              <property key="state" type="string">floating</property>
+              <property key="showTitleBar" type="bool">false</property>
+              <property key="cardBackground" type="string">#777777</property>
+          </gz-gui>
+      </plugin>
+
+      <!-- Inspector -->
+      <plugin filename="ComponentInspector" name="Component inspector">
+          <gz-gui>
+              <property type="bool" key="showTitleBar">false</property>
+              <property type="string" key="state">docked</property>
+          </gz-gui>
+      </plugin>
+
+      <!-- Entity tree -->
+      <plugin filename="EntityTree" name="Entity tree">
+          <gz-gui>
+              <property type="bool" key="showTitleBar">false</property>
+              <property type="string" key="state">docked</property>
+          </gz-gui>
+      </plugin>
+    </gui>
+
+    <model name='ground_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.800000012 0.800000012 0.800000012 1</ambient>
+            <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+            <specular>0.800000012 0.800000012 0.800000012 1</specular>
+          </material>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+
+    <model name='box_big'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://My_map/meshes/My_map.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://My_map/meshes/My_map.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>1</kinematic>
+      </link>
+      <pose>4.11717 0.775086 0 0 -0 0</pose>
+      <static>true</static>
+      <enable_wind>0</enable_wind>
+    </model>
+    <model name='three_paletee_new(long)'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-12.935 6.6953 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_paletee_new(long)_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-13.0892 5.55115 -0.011743 0.000714 -8e-06 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_paletee_new(long)_clone_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-13.0806 4.20512 -0.011749 0.00072 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_paletee_new(long)_clone_clone_0'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-13.0527 2.98712 -0.011749 0.00072 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_paletee_new(long)_clone_0'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-10.9821 6.69715 -0.011749 0.00072 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_paletee_new(long)_clone_clone_1'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-10.9607 5.47524 -0.011748 0.00072 -1e-06 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_paletee_new(long)_clone_clone_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-10.9774 4.22575 -0.011746 0.000713 -1.6e-05 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_paletee_new(long)_clone_clone_0_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-10.9565 2.96642 -0.011749 0.000719 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_long_move'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_long_move/meshes/three_long_move.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_long_move/meshes/three_long_move.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-10.2301 1.43119 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='roak_looong'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://roak_looong/meshes/roak_looong.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://roak_looong/meshes/roak_looong.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-9.40355 5.44885 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='roak_looong_0'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://roak_looong/meshes/roak_looong.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://roak_looong/meshes/roak_looong.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-9.40298 3.49451 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='palette_box'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://palette_box/meshes/palette_box.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://palette_box/meshes/palette_box.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-6.07732 2.55794 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_palette_big_new'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-13.142 -3.71197 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_palette_big_new_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-13.1533 -2.45106 -0.006797 -0.001861 3.8e-05 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_palette_big_new_clone_0'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-13.1814 -1.24749 -0.006797 -0.001861 3.8e-05 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_palette_big_new_clone_1'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-11.2242 -3.6994 -0.006797 -0.001861 3.8e-05 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_palette_big_new_clone_1_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-11.2903 -1.37502 -0.006958 -0.002192 -9e-06 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_big_move_2'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_big_move_2/meshes/three_big_move_2.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_big_move_2/meshes/three_big_move_2.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-9.84162 -2.22824 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_palette_big_new_clone_1_clone_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-8.87475 -3.70443 -0.006973 -0.002186 3e-06 -0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_palette_big_new_clone_1_clone_clone_0'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-8.87731 -2.56256 -0.006973 -0.002186 3e-06 -0</pose>
+      <static>true</static>
+    </model>
+    <model name='Docking_station_new_2'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://Docking_station_new_2/meshes/Docking_station_new_2.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://Docking_station_new_2/meshes/Docking_station_new_2.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>1</kinematic>
+      </link>
+      <pose>-4.43031 5.3468 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='Docking_station_new_2_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://Docking_station_new_2/meshes/Docking_station_new_2.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://Docking_station_new_2/meshes/Docking_station_new_2.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>1</kinematic>
+      </link>
+      <pose>-5.09503 2.82637 -0.000646 0.0064 0.00224 -1.57621</pose>
+      <static>true</static>
+    </model>
+    <model name='strorge_wood_box'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://strorge_wood_box/meshes/strorge_wood_box.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://strorge_wood_box/meshes/strorge_wood_box.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-3.9773 1.95272 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_long_move_0'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_long_move/meshes/three_long_move.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_long_move/meshes/three_long_move.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-1.34005 2.32687 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='dumy_1'>
+      <link name='map_link'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://dumy_1/meshes/dumy_1.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://dumy_1/meshes/dumy_1.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-1.82887 1.36116 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='roak_looong_1'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://roak_looong/meshes/roak_looong.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://roak_looong/meshes/roak_looong.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.50918 1.31346 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='forklift'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://forklift/meshes/forklift.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://forklift/meshes/forklift.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>6.64257 6.82499 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='palette_box_0'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://palette_box/meshes/palette_box.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://palette_box/meshes/palette_box.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>4.28975 2.38203 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='A_two_big_move'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://A_two_big_move/meshes/A_two_big_move.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://A_two_big_move/meshes/A_two_big_move.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>1.57408 2.58894 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_palette_big_new_0'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>1.59769 1.29302 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='dumy_2'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://dumy_2/meshes/dumy_2.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://dumy_2/meshes/dumy_2.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>4.02434 1.22057 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='strorge_wood_box_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://strorge_wood_box/meshes/strorge_wood_box.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://strorge_wood_box/meshes/strorge_wood_box.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>6.43409 1.64598 -0.008838 0.001885 3e-06 1.56571</pose>
+      <static>true</static>
+    </model>
+    <model name='strorge_wood_box_0'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://strorge_wood_box/meshes/strorge_wood_box.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://strorge_wood_box/meshes/strorge_wood_box.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>4.4382 4.73844 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_long_move_1'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_long_move/meshes/three_long_move.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_long_move/meshes/three_long_move.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>2.3333 3.85752 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_paletee_new(long)_0'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.395571 3.79417 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='dumy_2_0'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://dumy_2/meshes/dumy_2.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://dumy_2/meshes/dumy_2.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>1.30477 3.78034 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='roak_looong_2'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://roak_looong/meshes/roak_looong.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://roak_looong/meshes/roak_looong.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.71823 3.49034 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='dumy_1_0'>
+      <link name='map_link'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://dumy_1/meshes/dumy_1.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://dumy_1/meshes/dumy_1.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-1.84806 3.77634 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='two_plate_big_new'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://two_plate_big_new/meshes/two_plate_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://two_plate_big_new/meshes/two_plate_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-8.26374 3.88239 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='two_plate_big_new_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://two_plate_big_new/meshes/two_plate_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://two_plate_big_new/meshes/two_plate_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-8.36192 6.74923 -0.00807 -0.000792 0.00014 0</pose>
+      <static>true</static>
+    </model>
+    <model name='two_plate_big_new_clone_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://two_plate_big_new/meshes/two_plate_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://two_plate_big_new/meshes/two_plate_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-7.19998 6.74111 -0.009063 -0.00391 1.3e-05 0</pose>
+      <static>true</static>
+    </model>
+    <model name='two_plate_big_new_0'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://two_plate_big_new/meshes/two_plate_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://two_plate_big_new/meshes/two_plate_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-7.1284 3.93291 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_long_move_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_long_move/meshes/three_long_move.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_long_move/meshes/three_long_move.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-6.86595 5.27802 -0.012178 -0.004191 4e-06 1.58353</pose>
+      <static>true</static>
+    </model>
+    <model name='three_palette_big_new_clone_1_clone_clone_1'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-7.56932 -3.80567 -0.006964 -0.002188 1e-06 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_paletee_new(long)_clone_clone_0_clone_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-2.54838 -2.25936 -0.011758 0.000719 -1e-06 0</pose>
+      <static>true</static>
+    </model>
+    <model name='palette_box_1'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://palette_box/meshes/palette_box.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://palette_box/meshes/palette_box.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-2.83497 -3.60371 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='palette_box_1_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://palette_box/meshes/palette_box.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://palette_box/meshes/palette_box.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-1.23673 -3.60768 1.2e-05 -2.4e-05 -0 1.57594</pose>
+      <static>true</static>
+    </model>
+    <model name='three_paletee_new(long)_clone_clone_0_clone_clone_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_paletee_new(long)/meshes/three_paletee_new(long).dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-1.27033 -2.22846 -0.011742 0.000728 7e-06 0</pose>
+      <static>true</static>
+    </model>
+    <model name='three_palette_big_new_clone_1_clone_clone_1_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://three_palette_big_new/meshes/three_palette_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>2.82698 -2.17262 -0.006965 -0.002185 0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='dumy_2_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://dumy_2/meshes/dumy_2.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://dumy_2/meshes/dumy_2.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>4.21319 -3.79152 0.238256 -0.001918 2e-06 -1.3e-05</pose>
+      <static>true</static>
+    </model>
+    <model name='dumy_1_clone'>
+      <link name='map_link'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://dumy_1/meshes/dumy_1.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://dumy_1/meshes/dumy_1.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>7.83204 -2.47488 -0.009573 0.002764 -0 1e-06</pose>
+      <static>true</static>
+    </model>
+    <model name='two_plate_big_new_clone_0'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://two_plate_big_new/meshes/two_plate_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://two_plate_big_new/meshes/two_plate_big_new.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>4.26323 -2.19644 -0.009331 -0.003352 1e-06 -0</pose>
+      <static>true</static>
+    </model>
+    <model name='Carton_Box'>
+      <link name='map_link'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://Carton_Box/meshes/Carton_Box.dae</uri>
+              <scale>10 10 10</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://Carton_Box/meshes/Carton_Box.dae</uri>
+              <scale>10 10 10</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>4.39328 3.74548 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='box_long'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://box_long/meshes/box_long.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://box_long/meshes/box_long.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>3.35004 8.32076 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='truck_close'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://truck_close/meshes/truck_close.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://truck_close/meshes/truck_close.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-7.67245 -8.38285 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='truck_close_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://truck_close/meshes/truck_close.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://truck_close/meshes/truck_close.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>7.10581 -10.1879 -0.023021 -0.001603 -0.027577 1.56692</pose>
+      <static>true</static>
+    </model>
+    <model name='roak_looong_1_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://roak_looong/meshes/roak_looong.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://roak_looong/meshes/roak_looong.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-8.16392 0.648455 -0.00881 -1e-06 -0 -1e-06</pose>
+      <static>true</static>
+    </model>
+    <model name='truck_close_clone_clone'>
+      <link name='My_map'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://truck_close/meshes/truck_close.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://truck_close/meshes/truck_close.dae</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.861628 -9.55907 -0.023287 -0.001689 -0.012318 1.56692</pose>
+      <static>true</static>
+    </model>
+    <model name='person_standing'>
+      <link name='link'>
+        <inertial>
+          <pose>0 -0.1 0.95 0 -0 0</pose>
+          <mass>80</mass>
+          <inertia>
+            <ixx>24.88</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>25.73</iyy>
+            <iyz>0</iyz>
+            <izz>2.48</izz>
+          </inertia>
+        </inertial>
+        <collision name='bottom'>
+          <pose>0 -0.1 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.5 0.35 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='person'>
+          <pose>0 0 0.02 0.04 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://person_standing/meshes/standing.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 0.02 0.04 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://person_standing/meshes/standing.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.296001 -3.69795 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='person_standing_clone'>
+      <link name='link'>
+        <inertial>
+          <pose>0 -0.1 0.95 0 -0 0</pose>
+          <mass>80</mass>
+          <inertia>
+            <ixx>24.88</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>25.73</iyy>
+            <iyz>0</iyz>
+            <izz>2.48</izz>
+          </inertia>
+        </inertial>
+        <collision name='bottom'>
+          <pose>0 -0.1 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.5 0.35 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='person'>
+          <pose>0 0 0.02 0.04 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://person_standing/meshes/standing.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 0.02 0.04 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://person_standing/meshes/standing.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>5.37546 -3.10444 -0 0 -1e-06 -0.228962</pose>
+      <static>true</static>
+    </model>
+    <model name='person_standing_clone_0'>
+      <link name='link'>
+        <inertial>
+          <pose>0 -0.1 0.95 0 -0 0</pose>
+          <mass>80</mass>
+          <inertia>
+            <ixx>24.88</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>25.73</iyy>
+            <iyz>0</iyz>
+            <izz>2.48</izz>
+          </inertia>
+        </inertial>
+        <collision name='bottom'>
+          <pose>0 -0.1 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.5 0.35 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='person'>
+          <pose>0 0 0.02 0.04 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://person_standing/meshes/standing.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 0.02 0.04 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://person_standing/meshes/standing.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-3.86439 -1.99055 -1e-06 -2e-06 -1e-06 -0.228914</pose>
+      <static>true</static>
+    </model>
+    <model name='Carton_Box_clone'>
+      <link name='map_link'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://Carton_Box/meshes/Carton_Box.dae</uri>
+              <scale>10 10 10</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://Carton_Box/meshes/Carton_Box.dae</uri>
+              <scale>10 10 10</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>3.90992 8.18723 -6e-06 1e-06 -0 0</pose>
+      <static>true</static>
+    </model>
+    <model name='Carton_Box_0'>
+      <link name='map_link'>
+        <inertial>
+          <mass>0.1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://Carton_Box/meshes/Carton_Box.dae</uri>
+              <scale>10 10 10</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='map_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://Carton_Box/meshes/Carton_Box.dae</uri>
+              <scale>10 10 10</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>7.27165 1.81673 0 0 -0 0</pose>
+      <static>true</static>
+    </model>
+    <state world_name='default'>
+      <sim_time>519 671000000</sim_time>
+      <real_time>2847 796195669</real_time>
+      <wall_time>1736843152 853794097</wall_time>
+      <iterations>519671</iterations>
+      <model name='A_two_big_move'>
+        <pose>1.57408 2.58895 -0.014078 0.000585 2e-06 3e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>1.57408 2.58895 -0.014078 0.000585 2e-06 3e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.017155 -0.017891 18.5049 -1.27072 -1.21851 0</acceleration>
+          <wrench>0.001715 -0.001789 1.85049 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Carton_Box'>
+        <pose>4.39328 3.74548 -4e-06 1e-06 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='map_link'>
+          <pose>4.39328 3.74548 -4e-06 1e-06 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Carton_Box_0'>
+        <pose>7.35841 1.90853 -0 1e-06 -0 0.813603</pose>
+        <scale>1 1 1</scale>
+        <link name='map_link'>
+          <pose>7.35841 1.90853 -0 1e-06 -0 0.813603</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Carton_Box_clone'>
+        <pose>3.90992 8.18723 -6e-06 1e-06 0 -0.455448</pose>
+        <scale>1 1 1</scale>
+        <link name='map_link'>
+          <pose>3.90992 8.18723 -6e-06 1e-06 0 -0.455448</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Docking_station_new_2'>
+        <pose>-5.09259 3.6929 0.006277 0.00226 -0.021352 -1.57614</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-5.09259 3.6929 0.006277 0.00226 -0.021352 -1.57614</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Docking_station_new_2_clone'>
+        <pose>-5.09503 2.82637 -0.000646 0.0064 0.00224 -1.57621</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-5.09503 2.82637 -0.000646 0.0064 0.00224 -1.57621</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -98 0 -0 0</acceleration>
+          <wrench>0 0 -9.8 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='box_big'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='box_long'>
+        <pose>3.35305 8.30474 -0.010786 -1.44394 0.001041 0.243281</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>3.35305 8.30474 -0.010786 -1.44394 0.001041 0.243281</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.000281 0.000187 -0.000943 0.01567 -0.026411 0</acceleration>
+          <wrench>2.8e-05 1.9e-05 -9.4e-05 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='dumy_1'>
+        <pose>-1.82887 1.36005 -0.00957 0.002765 -8e-06 -7e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='map_link'>
+          <pose>-1.82887 1.36005 -0.00957 0.002765 -8e-06 -7e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.79999 1e-06 1e-06 0</acceleration>
+          <wrench>0 0 -0.979999 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='dumy_1_0'>
+        <pose>-1.84806 3.77637 -0.009574 0.002765 -0 1e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='map_link'>
+          <pose>-1.84806 3.77637 -0.009574 0.002765 -0 1e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.004364 0.002133 0.126401 0.223474 -0.456399 -1.1e-05</acceleration>
+          <wrench>0.000436 0.000213 0.01264 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='dumy_1_clone'>
+        <pose>8.16326 -2.06358 -0.009572 0.002772 1e-06 -1.56933</pose>
+        <scale>1 1 1</scale>
+        <link name='map_link'>
+          <pose>8.16326 -2.06358 -0.009572 0.002772 1e-06 -1.56933</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.012717 0.011851 18.388 1.23831 1.32857 0</acceleration>
+          <wrench>-0.001272 0.001185 1.8388 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='dumy_2'>
+        <pose>4.02434 1.22102 0.238256 -0.001896 -1e-06 -1.6e-05</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>4.02434 1.22102 0.238256 -0.001896 -1e-06 -1.6e-05</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.316889 0.337348 20.6003 -1.42074 1.33009 5e-05</acceleration>
+          <wrench>0.031689 0.033735 2.06003 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='dumy_2_0'>
+        <pose>1.30476 3.78079 0.238251 -0.001905 -1e-06 -1.6e-05</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>1.30476 3.78079 0.238251 -0.001905 -1e-06 -1.6e-05</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.094764 0.096799 -0.915166 -0.406438 -0.397517 0.000101</acceleration>
+          <wrench>-0.009476 0.00968 -0.091517 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='dumy_2_clone'>
+        <pose>4.20005 -3.60275 0.238242 -0.001907 3e-06 1.56016</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>4.20005 -3.60275 0.238242 -0.001907 3e-06 1.56016</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='forklift'>
+        <pose>7.82911 5.05654 -0.017463 -0.000879 -0 -3.13494</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>7.82911 5.05654 -0.017463 -0.000879 -0 -3.13494</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.002374 -0.002318 -0.018982 -0.132735 0.135913 1e-06</acceleration>
+          <wrench>-0.000237 -0.000232 -0.001898 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ground_plane'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='palette_box'>
+        <pose>-6.07732 2.55794 -0 1e-06 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-6.07732 2.55794 -0 1e-06 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-3e-06 -2e-06 17.9439 -1.78214 -1.48439 -3.14159</acceleration>
+          <wrench>-0 -0 1.79439 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='palette_box_0'>
+        <pose>4.00213 2.47059 1e-05 1.7e-05 3e-06 -1.5669</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>4.00213 2.47059 1e-05 1.7e-05 3e-06 -1.5669</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>9e-06 1.5e-05 20.8666 -1.78462 1.52639 -0</acceleration>
+          <wrench>1e-06 1e-06 2.08666 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='palette_box_1'>
+        <pose>-2.66905 -3.50608 8e-06 1.6e-05 -0 1.55343</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-2.66905 -3.50608 8e-06 1.6e-05 -0 1.55343</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>1e-06 -1e-06 -9.78984 -0.000598 -0.000497 0</acceleration>
+          <wrench>0 -0 -0.978984 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='palette_box_1_clone'>
+        <pose>-1.23673 -3.60768 0 0 -0 1.57594</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-1.23673 -3.60768 0 0 -0 1.57594</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-2e-06 -3e-06 18.0683 1.66142 -1.09466 0</acceleration>
+          <wrench>-0 -0 1.80683 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='person_standing'>
+        <pose>-0.280637 -3.12891 -0 1e-06 1e-06 0.38235</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-0.280637 -3.12891 -0 1e-06 1e-06 0.38235</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>1.89874 -0.445948 -1.58824 -2.63693 1.13113 -3.09726</acceleration>
+          <wrench>151.899 -35.6759 -127.059 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='person_standing_clone'>
+        <pose>5.37544 -3.10447 0 1e-06 -1e-06 -2.14941</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>5.37544 -3.10447 0 1e-06 -1e-06 -2.14941</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.077649 -2.67262 1.45652 2.74819 0.206039 0.080531</acceleration>
+          <wrench>6.21196 -213.81 116.522 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='person_standing_clone_0'>
+        <pose>-3.70459 -2.11643 -1e-06 -1e-06 1e-06 -2.23818</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.70459 -2.11643 -1e-06 -1e-06 1e-06 -2.23818</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.107327 -1.97849 -1.45873 2.03832 -0.068364 -0.047952</acceleration>
+          <wrench>-8.5862 -158.279 -116.699 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='roak_looong'>
+        <pose>-9.40355 5.44885 -0.008808 0.000135 -1e-06 -2e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-9.40355 5.44885 -0.008808 0.000135 -1e-06 -2e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='roak_looong_0'>
+        <pose>-9.40298 3.49451 -0.008805 0.000298 -2e-06 -2.9e-05</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-9.40298 3.49451 -0.008805 0.000298 -2e-06 -2.9e-05</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='roak_looong_1'>
+        <pose>0.50918 1.31346 -0.008818 4.4e-05 3e-06 -1e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>0.50918 1.31346 -0.008818 4.4e-05 3e-06 -1e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='roak_looong_1_clone'>
+        <pose>-6.93348 2.71563 -0.008819 2.5e-05 -0 1.5702</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-6.93348 2.71563 -0.008819 2.5e-05 -0 1.5702</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 -0 -0 -0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='roak_looong_2'>
+        <pose>-0.718229 3.49034 -0.008808 2e-06 -4.1e-05 -2.1e-05</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-0.718229 3.49034 -0.008808 2e-06 -4.1e-05 -2.1e-05</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.000453 -0.000198 3.19981 -0.022553 0.051439 0</acceleration>
+          <wrench>-4.5e-05 -2e-05 0.319981 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='strorge_wood_box'>
+        <pose>-5.05561 1.42791 -0.00884 0.00189 1e-06 1.56571</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-5.05561 1.42791 -0.00884 0.00189 1e-06 1.56571</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.00115 -0.012745 17.9162 -1.44191 -0.130074 0</acceleration>
+          <wrench>0.000115 -0.001275 1.79162 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='strorge_wood_box_0'>
+        <pose>3.28235 4.15927 -0.008847 0.001877 1e-06 1.57066</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>3.28235 4.15927 -0.008847 0.001877 1e-06 1.57066</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='strorge_wood_box_clone'>
+        <pose>8.60167 1.5777 -0.008839 0.001861 1e-06 -1.56719</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>8.60167 1.5777 -0.008839 0.001861 1e-06 -1.56719</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.001643 0.012584 17.5605 1.4239 -0.18604 -3e-06</acceleration>
+          <wrench>0.000164 0.001258 1.75605 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_big_move_2'>
+        <pose>-11.1882 -2.55266 -0.017392 0.005487 9e-06 2e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-11.1882 -2.55266 -0.017392 0.005487 9e-06 2e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.023779 0.022163 20.761 1.27448 -1.38681 1.4e-05</acceleration>
+          <wrench>0.002378 0.002216 2.0761 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_long_move'>
+        <pose>-12.9874 1.59683 -0.012179 -0.004198 2e-06 1.58353</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-12.9874 1.59683 -0.012179 -0.004198 2e-06 1.58353</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.015418 0.014993 18.49 1.23115 1.26592 -0</acceleration>
+          <wrench>-0.001542 0.001499 1.849 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_long_move_0'>
+        <pose>-1.82797 2.59348 -0.01219 -0.004192 -0 1.56924</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-1.82797 2.59348 -0.01219 -0.004192 -0 1.56924</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_long_move_1'>
+        <pose>2.3333 3.85747 -0.012177 -0.004189 4e-06 -2e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>2.3333 3.85747 -0.012177 -0.004189 4e-06 -2e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>2e-06 -4e-06 -9.79593 -0.000182 -0.000175 0</acceleration>
+          <wrench>0 -0 -0.979593 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_long_move_clone'>
+        <pose>-6.02573 3.94905 -0.01218 -0.004194 4e-06 -3.13693</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-6.02573 3.94905 -0.01218 -0.004194 4e-06 -3.13693</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.015901 -0.014339 19.0097 -1.17735 1.3068 1e-06</acceleration>
+          <wrench>-0.00159 -0.001434 1.90097 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_paletee_new(long)'>
+        <pose>-13.0847 6.79126 -0.011749 0.00072 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-13.0847 6.79126 -0.011749 0.00072 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.014583 -0.015583 18.4156 -1.32662 -1.24147 -0</acceleration>
+          <wrench>0.001458 -0.001558 1.84156 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_paletee_new(long)_0'>
+        <pose>0.263037 3.83981 -0.011749 0.00072 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>0.263037 3.83981 -0.011749 0.00072 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.004082 -0.002585 0.328632 -0.21876 0.347976 1.4e-05</acceleration>
+          <wrench>-0.000408 -0.000259 0.032863 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_paletee_new(long)_clone'>
+        <pose>-13.0892 5.55115 -0.011749 0.00072 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-13.0892 5.55115 -0.011749 0.00072 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.003367 -0.002083 0.209978 -0.176098 -0.287502 -2.4e-05</acceleration>
+          <wrench>0.000337 -0.000208 0.020998 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_paletee_new(long)_clone_0'>
+        <pose>-10.9821 6.69715 -0.011749 0.00072 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-10.9821 6.69715 -0.011749 0.00072 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.004571 0.002475 -0.329596 0.209215 0.389983 4.8e-05</acceleration>
+          <wrench>-0.000457 0.000247 -0.03296 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_paletee_new(long)_clone_clone'>
+        <pose>-13.0806 4.20512 -0.011749 0.00072 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-13.0806 4.20512 -0.011749 0.00072 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.003438 -0.002094 0.214507 -0.177007 -0.293585 -2.4e-05</acceleration>
+          <wrench>0.000344 -0.000209 0.021451 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_paletee_new(long)_clone_clone_0'>
+        <pose>-13.0527 2.98712 -0.011749 0.00072 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-13.0527 2.98712 -0.011749 0.00072 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.004103 -0.002593 0.337723 -0.219453 0.34976 1.3e-05</acceleration>
+          <wrench>-0.00041 -0.000259 0.033772 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_paletee_new(long)_clone_clone_0_clone'>
+        <pose>-10.9565 2.96642 -0.011748 0.000718 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-10.9565 2.96642 -0.011748 0.000718 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.000611 0.000631 -8.63686 0.054646 -0.051177 -1e-06</acceleration>
+          <wrench>6.1e-05 6.3e-05 -0.863686 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_paletee_new(long)_clone_clone_0_clone_clone'>
+        <pose>-2.67993 -2.25936 -0.011746 0.000723 -3e-06 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-2.67993 -2.25936 -0.011746 0.000723 -3e-06 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.006908 -0.006484 2.72419 -0.551282 0.588629 1e-06</acceleration>
+          <wrench>-0.000691 -0.000648 0.272419 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_paletee_new(long)_clone_clone_0_clone_clone_clone'>
+        <pose>-1.27033 -2.22846 -0.01174 0.000726 -1.3e-05 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-1.27033 -2.22846 -0.01174 0.000726 -1.3e-05 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.013984 -0.013099 15.5375 -1.11529 1.19084 0</acceleration>
+          <wrench>-0.001398 -0.00131 1.55375 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_paletee_new(long)_clone_clone_1'>
+        <pose>-10.9607 5.47524 -0.011758 0.00072 -2e-06 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-10.9607 5.47524 -0.011758 0.00072 -2e-06 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_paletee_new(long)_clone_clone_clone'>
+        <pose>-10.9774 4.22575 -0.011748 0.000721 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-10.9774 4.22575 -0.011748 0.000721 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.005411 -0.005785 0.674768 -0.492496 -0.460884 0</acceleration>
+          <wrench>0.000541 -0.000579 0.067477 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_palette_big_new'>
+        <pose>-13.142 -3.71198 -0.006964 -0.002186 2e-06 1e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-13.142 -3.71198 -0.006964 -0.002186 2e-06 1e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.002932 0.002748 -0.843168 0.394579 -0.420969 0</acceleration>
+          <wrench>0.000293 0.000275 -0.084317 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_palette_big_new_0'>
+        <pose>1.59769 1.29301 -0.006954 -0.00217 -1.2e-05 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>1.59769 1.29301 -0.006954 -0.00217 -1.2e-05 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-2e-06 1e-06 -9.79999 -1e-06 1e-06 0</acceleration>
+          <wrench>-0 0 -0.979999 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_palette_big_new_clone'>
+        <pose>-13.1533 -2.45106 -0.006972 -0.002191 -1e-06 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-13.1533 -2.45106 -0.006972 -0.002191 -1e-06 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 -0 -0 -0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_palette_big_new_clone_0'>
+        <pose>-13.1814 -1.24749 -0.006973 -0.002185 3e-06 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-13.1814 -1.24749 -0.006973 -0.002185 3e-06 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_palette_big_new_clone_1'>
+        <pose>-11.2242 -3.6994 -0.006963 -0.002178 0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-11.2242 -3.6994 -0.006963 -0.002178 0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.002884 -0.003076 -0.389591 -0.441783 0.414056 0</acceleration>
+          <wrench>-0.000288 -0.000308 -0.038959 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_palette_big_new_clone_1_clone'>
+        <pose>-11.2124 -1.31149 -0.006965 -0.002176 -1.5e-05 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-11.2124 -1.31149 -0.006965 -0.002176 -1.5e-05 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 -0 -0 -0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_palette_big_new_clone_1_clone_clone'>
+        <pose>-8.87475 -3.70443 -0.006966 -0.002183 1e-06 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-8.87475 -3.70443 -0.006966 -0.002183 1e-06 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.001036 -0.001952 1.09678 -0.280608 0.149051 2e-06</acceleration>
+          <wrench>-0.000104 -0.000195 0.109677 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_palette_big_new_clone_1_clone_clone_0'>
+        <pose>-8.87731 -2.56256 -0.006964 -0.002184 4e-06 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-8.87731 -2.56256 -0.006964 -0.002184 4e-06 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.000157 0.000148 -9.32111 0.021097 -0.022508 0</acceleration>
+          <wrench>1.6e-05 1.5e-05 -0.932111 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_palette_big_new_clone_1_clone_clone_1'>
+        <pose>-7.56932 -3.80567 -0.006967 -0.002193 -9e-06 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-7.56932 -3.80567 -0.006967 -0.002193 -9e-06 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='three_palette_big_new_clone_1_clone_clone_1_clone'>
+        <pose>2.82698 -2.17262 -0.006966 -0.002183 1e-06 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>2.82698 -2.17262 -0.006966 -0.002183 1e-06 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.0091 0.008529 17.9983 1.22461 -1.30651 0</acceleration>
+          <wrench>0.00091 0.000853 1.79983 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='truck_close'>
+        <pose>-4.59611 -9.50292 -0.023302 -0.001695 -0.009402 1.56692</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-4.59611 -9.50292 -0.023302 -0.001695 -0.009402 1.56692</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.024123 4.2e-05 -0.383047 0.001793 1.03527 0</acceleration>
+          <wrench>-0.002412 4e-06 -0.038305 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='truck_close_clone'>
+        <pose>6.13938 -9.53893 -0.023307 -0.001694 -0.007533 1.56692</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>6.13938 -9.53893 -0.023307 -0.001694 -0.007533 1.56692</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.023739 4.2e-05 -0.520814 0.001803 1.01859 0</acceleration>
+          <wrench>-0.002374 4e-06 -0.052081 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='truck_close_clone_clone'>
+        <pose>0.790326 -9.54164 -0.023323 -0.001691 -0.003475 1.56692</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>0.790326 -9.54164 -0.023323 -0.001691 -0.003475 1.56692</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='two_plate_big_new'>
+        <pose>-8.38023 3.88236 -0.009331 -0.003348 1e-06 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-8.38023 3.88236 -0.009331 -0.003348 1e-06 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.011535 -0.012299 18.3996 -1.32303 1.24077 0</acceleration>
+          <wrench>-0.001154 -0.00123 1.83996 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='two_plate_big_new_0'>
+        <pose>-7.1284 3.85439 -0.009322 -0.003364 -9e-06 -2e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-7.1284 3.85439 -0.009322 -0.003364 -9e-06 -2e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 1e-06 -9.79999 1e-06 1e-06 0</acceleration>
+          <wrench>0 0 -0.979999 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='two_plate_big_new_clone'>
+        <pose>-8.36192 6.74921 -0.009328 -0.003345 3e-06 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-8.36192 6.74921 -0.009328 -0.003345 3e-06 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.011575 -0.012342 18.4045 -1.32326 -1.24099 0</acceleration>
+          <wrench>0.001157 -0.001234 1.84045 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='two_plate_big_new_clone_0'>
+        <pose>4.26323 -2.19644 -0.009332 -0.003351 1e-06 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>4.26323 -2.19644 -0.009332 -0.003351 1e-06 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.000214 -0.00023 -9.28104 -0.024348 -0.022834 0</acceleration>
+          <wrench>2.1e-05 -2.3e-05 -0.928104 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='two_plate_big_new_clone_clone'>
+        <pose>-7.19998 6.74111 -0.009333 -0.00337 -1e-06 0</pose>
+        <scale>1 1 1</scale>
+        <link name='My_map'>
+          <pose>-7.19998 6.74111 -0.009333 -0.00337 -1e-06 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+    </state>
+
+    <light name='sun' type='directional'>
+      <pose>0 0 10 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>-0.5 0.10000000000000001 -0.90000000000000002</direction>
+      <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+      <specular>0.200000003 0.200000003 0.200000003 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.01</linear>
+        <constant>0.90000000000000002</constant>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+  </world>
+</sdf>
