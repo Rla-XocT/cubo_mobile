@@ -1,0 +1,124 @@
+<?xml version="1.0" ?>
+<robot name="cubo" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+    <transmission name="lift_joint_tran">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="lift_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="lift_joint_actr">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="wheel_joint_a_tran">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="wheel_joint_a">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="wheel_joint_a_actr">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="wheel_joint_b_tran">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="wheel_joint_b">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="wheel_joint_b_actr">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="c_joint_a_1_tran">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="c_joint_a_1">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="c_joint_a_1_actr">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="c_joint_b_1_tran">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="c_joint_b_1">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="c_joint_b_1_actr">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="c_joint_c_1_tran">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="c_joint_c_1">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="c_joint_c_1_actr">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="c_joint_d_1_tran">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="c_joint_d_1">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="c_joint_d_1_actr">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="c_joint_a_2_tran">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="c_joint_a_2">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="c_joint_a_2_actr">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="c_joint_b_2_tran">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="c_joint_b_2">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="c_joint_b_2_actr">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="c_joint_c_2_tran">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="c_joint_c_2">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="c_joint_c_2_actr">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="c_joint_d_2_tran">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="c_joint_d_2">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="c_joint_d_2_actr">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+</robot>

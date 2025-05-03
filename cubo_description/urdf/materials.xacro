@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<robot name="cubo" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+  <!-- 로봇 모델을 정의하는 매크로 -->
+  <xacro:macro name="insert_robot" params="namespace is_sim">
+
+    <!-- 네임스페이스를 사용하여 material 이름을 고유하게 설정 -->
+    <material name="${namespace}_cubo_silver">
+      <color rgba="0.700 0.700 0.700 1.000"/>
+    </material>
+    
+  </xacro:macro>
+
+</robot>

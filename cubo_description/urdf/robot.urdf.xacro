@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="cubo">
+    <xacro:include filename="$(find cubo_description)/urdf/common/insert_inertia.urdf.xacro"/>
+    <xacro:include filename="$(find cubo_description)/urdf/cubo.xacro"/>
+
+    <xacro:arg name="is_sim" default="false"/>
+    <xacro:arg name="namespace" default=""/>
+
+    <xacro:insert_robot namespace="$(arg namespace)" is_sim="$(arg is_sim)"/>
+</robot>

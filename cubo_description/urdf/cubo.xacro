@@ -1,0 +1,436 @@
+<?xml version="1.0" ?>
+<robot name="cubo" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="insert_robot" params="namespace is_sim">
+    <xacro:include filename="$(find cubo_description)/urdf/materials.xacro" />
+    <xacro:include filename="$(find cubo_description)/urdf/cubo.trans" />
+    <xacro:include filename="$(find cubo_description)/urdf/cubo.gazebo" />
+    <xacro:include filename="$(find cubo_description)/urdf/cubo_ros2_control.urdf.xacro" />
+
+    <link name="fixed_base"/>
+
+    <link name="base_link">
+      <inertial>
+          <origin xyz="-0.004 0.000 0.041" rpy="0 0 0"/>
+          <mass value="28.14"/>
+          <inertia ixx="0.363967" ixy="0.002789" ixz="0.001543" iyy="0.570563" iyz="-0.000279" izz="0.788194"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="cubo_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="lift">
+      <inertial>
+        <origin xyz="-9.18631856758714e-05 0.146812629912676 0.08710089925322241" rpy="0 0 0"/>
+        <mass value="10.250168665374813"/>
+        <inertia ixx="0.119518" iyy="0.038664" izz="0.145642" ixy="5e-05" iyz="0.000414" ixz="-4e-06"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/lift.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="cubo_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/lift.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="wheel_l">
+      <inertial>
+        <origin xyz="0.03563639731480209 -2.88928873216952e-10 3.761487369115246e-07" rpy="0 0 0"/>
+        <mass value="2.1569185522943797"/>
+        <inertia ixx="0.005268" iyy="0.003293" izz="0.003293" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/wheel_l.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="cubo_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/wheel_l.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="wheel_r">
+      <inertial>
+        <origin xyz="-0.035636378976420025 2.889289472655107e-10 3.761487369115246e-07" rpy="0 0 0"/>
+        <mass value="2.1569185522943797"/>
+        <inertia ixx="0.005268" iyy="0.003293" izz="0.003293" ixy="0.0" iyz="0.0" ixz="0.0"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/wheel_r.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="cubo_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/wheel_r.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="c_a_1">
+      <inertial>
+        <origin xyz="-0.0007867395902900198 0.005806933510111967 -0.014688033462714347" rpy="0 0 0"/>
+        <mass value="0.22400375430742672"/>
+        <inertia ixx="8.6e-05" iyy="9e-05" izz="9.9e-05" ixy="3e-06" iyz="2.2e-05" ixz="-4e-06"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_a_1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="cubo_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_a_1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="c_b_1">
+      <inertial>
+        <origin xyz="-0.0007869921219839648 0.005807186041805051 -0.014717502629345933" rpy="0 0 0"/>
+        <mass value="0.22400375430742672"/>
+        <inertia ixx="8.6e-05" iyy="9e-05" izz="9.9e-05" ixy="3e-06" iyz="2.2e-05" ixz="-4e-06"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_b_1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="cubo_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_b_1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="c_c_1">
+      <inertial>
+        <origin xyz="-0.0007869921219829934 0.005807186041805051 -0.014717502629346332" rpy="0 0 0"/>
+        <mass value="0.22400375430742672"/>
+        <inertia ixx="8.6e-05" iyy="9e-05" izz="9.9e-05" ixy="3e-06" iyz="2.2e-05" ixz="-4e-06"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_c_1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="cubo_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_c_1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="c_d_1">
+      <inertial>
+        <origin xyz="-0.0007869921219839648 0.005807186041806051 -0.014717502629346225" rpy="0 0 0"/>
+        <mass value="0.22400375430742672"/>
+        <inertia ixx="8.6e-05" iyy="9e-05" izz="9.9e-05" ixy="3e-06" iyz="2.2e-05" ixz="-4e-06"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_d_1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="cubo_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_d_1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="c_a_2">
+      <inertial>
+        <origin xyz="-0.01705573764882845 -0.10044925673105691 0.12455011353256065" rpy="0 0 0"/>
+        <mass value="0.31305714263215006"/>
+        <inertia ixx="0.000109" iyy="7.2e-05" izz="7.2e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_a_2.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="cubo_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_a_2.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="c_b_2">
+      <inertial>
+        <origin xyz="-0.020084990180522316 0.1774999958006361 0.1274996443659291" rpy="0 0 0"/>
+        <mass value="0.31305714263215006"/>
+        <inertia ixx="0.000109" iyy="7.2e-05" izz="7.2e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_b_2.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="cubo_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_b_2.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="c_c_2">
+      <inertial>
+        <origin xyz="-0.02008499018052147 -0.09850000419936367 -0.2505003556340713" rpy="0 0 0"/>
+        <mass value="0.31305714263215006"/>
+        <inertia ixx="0.000109" iyy="7.2e-05" izz="7.2e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_c_2.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="cubo_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_c_2.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="c_d_2">
+      <inertial>
+        <origin xyz="-0.02008499018052251 0.17750000419936318 -0.2505003462855625" rpy="0 0 0"/>
+        <mass value="0.31305714263215006"/>
+        <inertia ixx="0.000109" iyy="7.2e-05" izz="7.2e-05" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_d_2.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="cubo_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/c_d_2.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="lidar">
+      <inertial>
+        <origin xyz="0.02060264842860216 -0.019925485695754058 0.01908561854882558" rpy="0 0 0"/>
+        <mass value="1.280064180483868"/>
+        <inertia ixx="0.000598" iyy="0.000598" izz="0.000847" ixy="-0.0" iyz="-1.5e-05" ixz="4e-06"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/lidar.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="cubo_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/lidar.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="imu">
+      <inertial>
+        <origin xyz="0.014500009169191006 0.014499999999991284 -0.004965921509042865" rpy="0 0 0"/>
+        <mass value="0.09329704159627104"/>
+        <inertia ixx="1e-05" iyy="1e-05" izz="1.8e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/imu.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="cubo_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/imu.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="camera">
+      <inertial>
+        <origin xyz="-0.00808908239378873 -0.02274137583535496 0.0005909330101719415" rpy="0 0 0"/>
+        <mass value="0.07461958066040388"/>
+        <inertia ixx="9e-06" iyy="1.6e-05" izz="2.5e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/camera.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="cubo_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://cubo_description/meshes/camera.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="fixed_base_joint" type="fixed">
+      <origin xyz="0 0 0.022" rpy="0 0 1.5708"/>
+      <parent link="fixed_base"/>
+      <child link="base_link"/>
+      <axis xyz="0.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="lift_joint" type="prismatic">
+      <origin xyz="0.0005 -0.096 0.1105" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="lift"/>
+      <axis xyz="0.0 0.0 1.0"/>
+      <limit upper="0.06" lower="0.0" effort="100" velocity="100"/>
+    </joint>
+
+    <joint name="wheel_joint_a" type="continuous">
+      <origin xyz="0.126 0.0 0.019" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="wheel_l"/>
+      <axis xyz="1.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="wheel_joint_b" type="continuous">
+      <origin xyz="-0.124 0.0 0.019" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="wheel_r"/>
+      <axis xyz="1.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="c_joint_a_1" type="continuous">
+      <origin xyz="-0.13895 -0.18705 0.021664" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="c_a_1"/>
+      <axis xyz="0.0 -0.0 -1.0"/>
+    </joint>
+
+    <joint name="c_joint_b_1" type="continuous">
+      <origin xyz="0.139 -0.19 0.018664" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="c_b_1"/>
+      <axis xyz="0.0 0.0 -1.0"/>
+    </joint>
+
+    <joint name="c_joint_c_1" type="continuous">
+      <origin xyz="-0.137 0.188 0.018664" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="c_c_1"/>
+      <axis xyz="0.0 0.0 -1.0"/>
+    </joint>
+
+    <joint name="c_joint_d_1" type="continuous">
+      <origin xyz="0.139 0.188 0.018664" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="c_d_1"/>
+      <axis xyz="-0.0 0.0 -1.0"/>
+    </joint>
+
+    <joint name="c_joint_a_2" type="fixed">
+      <origin xyz="0.017056 0.122949 -0.16327" rpy="0 0 0"/>
+      <parent link="c_a_1"/>
+      <child link="c_a_2"/>
+      <axis xyz="-1.0 -0.0 -0.0"/>
+    </joint>
+
+    <joint name="c_joint_b_2" type="fixed">
+      <origin xyz="0.020085 -0.155 -0.166249" rpy="0 0 0"/>
+      <parent link="c_b_1"/>
+      <child link="c_b_2"/>
+      <axis xyz="-1.0 -0.0 -0.0"/>
+    </joint>
+
+    <joint name="c_joint_c_2" type="fixed">
+      <origin xyz="0.020085 0.121 0.211751" rpy="0 0 0"/>
+      <parent link="c_c_1"/>
+      <child link="c_c_2"/>
+      <axis xyz="-1.0 -0.0 -0.0"/>
+    </joint>
+
+    <joint name="c_joint_d_2" type="fixed">
+      <origin xyz="0.020085 -0.155 0.211751" rpy="0 0 0"/>
+      <parent link="c_d_1"/>
+      <child link="c_d_2"/>
+      <axis xyz="-1.0 -0.0 0.0"/>
+    </joint>
+
+    <joint name="lidar_joint" type="fixed">
+      <origin xyz="-0.01975 -0.186 0.109" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="lidar"/>
+    </joint>
+
+    <joint name="imu_joint" type="fixed">
+      <origin xyz="-0.0135 -0.0145 0.0" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="imu"/>
+    </joint>
+
+    <joint name="camera_joint" type="fixed">
+      <origin xyz="0.0084 -0.215 -0.01" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="camera"/>
+    </joint>
+
+    <xacro:if value="${is_sim}">
+        <xacro:insert_gazebo namespace="${namespace}"/>
+    </xacro:if>
+    <xacro:insert_ros2_control name="cubo" is_sim="${is_sim}"/>
+
+  </xacro:macro>
+
+</robot>
